@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - run: - run: pip install requests jdatetime
+      - run: pip install requests jdatetime
 
       - run: python bot.py
         env:
