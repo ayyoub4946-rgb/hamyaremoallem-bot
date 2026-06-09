@@ -1,8 +1,8 @@
 import requests
 from datetime import datetime
 
-BOT_TOKEN = "YOUR_BOT_TOKEN"
-CHAT_ID = "YOUR_CHANNEL_ID"
+BOT_TOKEN = "8957022702:AAGyd-pYfaI_QgHXmUr_KSHu_s3jRamhpv0"
+CHAT_ID = "-1003725162783"
 
 today = datetime.now().strftime("%Y-%m-%d")
 
