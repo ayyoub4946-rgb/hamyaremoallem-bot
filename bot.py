@@ -1,15 +1,16 @@
+import os
 import requests
-from datetime import datetime
+import jdatetime
 
-BOT_TOKEN = "8957022702:AAGyd-pYfaI_QgHXmUr_KSHu_s3jRamhpv0"
+BOT_TOKEN = os.environ["8957022702:AAGyd-pYfaI_QgHXmUr_KSHu_s3jRamhpv0"]
 CHAT_ID = "-1003725162783"
 
-today = datetime.now().strftime("%Y-%m-%d")
+today = jdatetime.date.today()
 
 message = f"""
-📅 تقویم روز
+📅 تقویم روز | همیار معلم
 
-🗓 {today}
+🗓 {today.strftime('%Y/%m/%d')}
 
 🌸 صبح بخیر فرهنگیان گرامی
 
@@ -20,9 +21,12 @@ message = f"""
 @HamyareMoallem
 """
 
-url = f"https://api.telegram.org/bot{8957022702:AAGyd-pYfaI_QgHXmUr_KSHu_s3jRamhpv0}/sendMessage"
+url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
-requests.post(url, data={
-    "chat_id": CHAT_ID,
-    "text": message
-})
+requests.post(
+    url,
+    data={
+        "chat_id": CHAT_ID,
+        "text": message
+    }
+)
