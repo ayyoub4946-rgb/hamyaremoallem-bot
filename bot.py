@@ -2,7 +2,7 @@ import os
 import requests
 import jdatetime
 
-BOT_TOKEN = os.environ["8957022702:AAGyd-pYfaI_QgHXmUr_KSHu_s3jRamhpv0"]
+BOT_TOKEN = os.environ["BOT_TOKEN"]
 CHAT_ID = "-1003725162783"
 
 today = jdatetime.date.today()
