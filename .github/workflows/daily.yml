@@ -2,8 +2,8 @@ name: Daily Telegram Message
 
 on:
   schedule:
-    - cron: '40 18 * * *'   # 18:40 UTC = 22:10 ایران
-    workflow_dispatch:
+    - cron: '52 17 * * *'   # 17:52 UTC = 22:22 ایران
+  workflow_dispatch:
 
 jobs:
   send:
