@@ -1,32 +1,63 @@
 import os
+import random
 import requests
-from datetime import datetime, timezone
+import jdatetime
 
 BOT_TOKEN = os.environ["BOT_TOKEN"]
 CHAT_ID = "-1003725162783"
 
-utc_now = datetime.now(timezone.utc)
+today = jdatetime.date.today()
 
-# محاسبه زمان ایران (UTC+3:30)
-iran_hour = utc_now.hour + 3
-iran_minute = utc_now.minute + 30
-if iran_minute >= 60:
-    iran_minute -= 60
-    iran_hour += 1
-iran_hour = iran_hour % 24
+weekdays = ["شنبه", "یکشنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنجشنبه", "جمعه"]
+months = ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"]
 
-message = f"""🔧 تست مستقیم ربات - همیار معلم
+day_name = weekdays[today.weekday()]
+month_name = months[today.month - 1]
+date_text = f"{day_name} {today.day} {month_name} {today.year}"
 
-🕐 UTC: {utc_now.strftime('%H:%M:%S')}
-🕒 ایران: {iran_hour:02d}:{iran_minute:02d}
+quotes = [
+    "تلاش امروز، موفقیت فرداست.",
+    "دانایی، سرمایه‌ای است که هرگز از بین نمی‌رود.",
+    "معلمی، هنر ساختن آینده است.",
+    "هر روز فرصتی تازه برای یادگیری و رشد است.",
+    "هیچ تلاشی بی‌ثمر نمی‌ماند.",
+    "موفقیت از پشتکار متولد می‌شود.",
+    "امروز بهترین فرصت برای شروع دوباره است.",
+    "آینده را کسانی می‌سازند که امروز می‌آموزند.",
+    "با لبخند صبح را آغاز کن، تا روزت پر از نور شود.",
+    "مهربانی، زبانی است که ناشنوایان می‌شنوند و نابینایان می‌بینند.",
+    "امید را هیچ‌گاه از دست نده، زیرا آخرین کلید موفقیت است.",
+    "سخت‌کوشی، پل رسیدن به رویاست.",
+    "آرامش را در دل خود بکار، تا جهان پیرامونت آرام گیرد.",
+    "هر صبح، یک صفحه سفید است. قلم به دست بگیر و زیبا بنویس.",
+    "موفقیت نصیب کسانی می‌شود که دست از تلاش برنمی‌دارند.",
+    "دانش، نوری است که هیچ طوفانی خاموشش نمی‌کند.",
+    "بخشش، زیباترین انتقام است.",
+    "زندگی مثل دوچرخه‌سواری است، برای حفظ تعادل باید به حرکت ادامه دهی.",
+    "باشد که امروزت بهتر از دیروز باشد.",
+    "قلمت روان، دلت شاد و روزت پر از موفقیت."
+]
 
-ربات با موفقیت کار می‌کند."""
+quote = random.choice(quotes)
+
+message = f"""
+🌸 <b>صبح بخیر فرهنگیان گرامی</b>
+
+📅 <b>{date_text}</b>
+
+💡 <b>سخن امروز:</b>
+
+{quote}
+
+🌱 روزی سرشار از سلامتی، آرامش و موفقیت برای شما آرزومندیم.
+
+📚 <b>همیار معلم</b>
+@HamyareMoallem
+"""
 
 url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
-r = requests.post(url, data={
+requests.post(url, data={
     "chat_id": CHAT_ID,
     "text": message,
     "parse_mode": "HTML"
 })
-
-print(r.status_code, r.text)
