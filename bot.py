@@ -6,16 +6,21 @@ BOT_TOKEN = os.environ["BOT_TOKEN"]
 CHAT_ID = "-1003725162783"
 
 utc_now = datetime.now(timezone.utc)
-iran_now = utc_now.replace(hour=(utc_now.hour + 3) % 24, minute=utc_now.minute + 30)
 
-message = f"""
-🔧 **تست ربات - همیار معلم**
+# محاسبه زمان ایران (UTC+3:30)
+iran_hour = utc_now.hour + 3
+iran_minute = utc_now.minute + 30
+if iran_minute >= 60:
+    iran_minute -= 60
+    iran_hour += 1
+iran_hour = iran_hour % 24
 
-🕐 **UTC:** {utc_now.strftime('%H:%M:%S')}
-🕒 **ایران:** {iran_now.strftime('%H:%M:%S')}
+message = f"""🔧 تست مستقیم ربات - همیار معلم
 
-ربات در این ساعت اجرا شده است.
-"""
+🕐 UTC: {utc_now.strftime('%H:%M:%S')}
+🕒 ایران: {iran_hour:02d}:{iran_minute:02d}
+
+ربات با موفقیت کار می‌کند."""
 
 url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 r = requests.post(url, data={
