@@ -1,23 +1,16 @@
 name: Daily Telegram Message
-
 on:
-  schedule:
-    - cron: '30 11 * * *'   # 7:00 صبح ایران
   workflow_dispatch:
 
 jobs:
   send:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       - run: pip install requests jdatetime
-
       - run: python bot.py
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
